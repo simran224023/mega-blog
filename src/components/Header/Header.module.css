@@ -1,0 +1,245 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--neutral-200);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  position: relative;
+}
+
+.logoSection {
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.logoLink {
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.logoLink:hover {
+  transform: scale(1.02);
+}
+
+.logoLink:focus {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-1);
+  background: var(--neutral-100);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--neutral-200);
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navButton {
+  background: transparent;
+  border: none;
+  color: var(--neutral-700);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
+  position: relative;
+  white-space: nowrap;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.navButton:hover {
+  background: var(--neutral-200);
+  color: var(--neutral-900);
+}
+
+.navButton:focus {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.activeNavButton {
+  background: var(--primary-500);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.activeNavButton:hover {
+  background: var(--primary-600);
+  color: white;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--neutral-100);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--neutral-200);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--neutral-700);
+  white-space: nowrap;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  padding: var(--space-2);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.mobileMenuButton:focus {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hamburgerLine {
+  width: 20px;
+  height: 2px;
+  background: var(--neutral-700);
+  transition: all 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 1024px) {
+  .navContent {
+    gap: var(--space-4);
+  }
+  
+  .userName {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 64px;
+  }
+  
+  .nav {
+    height: 64px;
+  }
+  
+  .mobileMenuButton {
+    display: block;
+  }
+  
+  .navList {
+    position: fixed;
+    top: 64px;
+    left: var(--space-4);
+    right: var(--space-4);
+    background: white;
+    flex-direction: column;
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--neutral-200);
+    gap: var(--space-2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .navList.mobileOpen {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .navButton {
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    justify-content: flex-start;
+  }
+  
+  .userSection {
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+  }
+  
+  .userAvatar {
+    width: 28px;
+    height: 28px;
+    font-size: var(--text-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 0 var(--space-3);
+  }
+  
+  .navList {
+    left: var(--space-3);
+    right: var(--space-3);
+  }
+}

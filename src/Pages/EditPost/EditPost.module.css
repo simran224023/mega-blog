@@ -1,0 +1,44 @@
+.cleanErrorPage {
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  padding: var(--space-6);
+}
+
+.errorContent {
+  text-align: center;
+  max-width: 400px;
+  background: white;
+  padding: var(--space-12);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--neutral-200);
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+  color: var(--error-500);
+}
+
+.errorTitle {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--neutral-900);
+  margin: 0 0 var(--space-3);
+}
+
+.errorMessage {
+  font-size: var(--text-base);
+  color: var(--neutral-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .cleanErrorPage {
+    padding: var(--space-4);
+  }
+}

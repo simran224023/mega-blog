@@ -1,0 +1,253 @@
+.footer {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  margin-top: auto;
+}
+
+.footerMain {
+  padding: 80px 0 40px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerBrand {
+  max-width: 400px;
+}
+
+.footerDescription {
+  margin: 24px 0 32px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.socialLink:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.socialLink span {
+  font-size: 18px;
+}
+
+.newsletter {
+  max-width: 400px;
+}
+
+.newsletterTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.newsletterDescription {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.newsletterInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.newsletterInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletterInput:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.newsletterButton {
+  padding: 12px 20px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.newsletterButton:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.linkGroup {
+  min-width: 0;
+}
+
+.linkGroupTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkList li {
+  margin-bottom: 12px;
+}
+
+.footerLink {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footerLink:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+.footerBottom {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerBottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0;
+}
+
+.madeWith {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footerLinks {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerMain {
+    padding: 60px 0 30px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .footerTop {
+    gap: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+  }
+
+  .footerLinks {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+  }
+
+  .footerBottomContent {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .socialLinks {
+    flex-wrap: wrap;
+  }
+
+  .socialLink {
+    width: 40px;
+    height: 40px;
+  }
+
+  .socialLink span {
+    font-size: 16px;
+  }
+}

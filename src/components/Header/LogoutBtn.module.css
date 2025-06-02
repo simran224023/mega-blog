@@ -1,0 +1,53 @@
+.logoutBtn {
+  min-width: 88px !important;
+  width: 88px !important;
+  height: 36px !important;
+  transition: all 0.2s ease !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  padding: var(--space-2) var(--space-4) !important;
+  font-size: var(--text-xs) !important;
+  box-sizing: border-box !important;
+  
+  /* Improve text centering */
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.logoutBtn:hover:not(.loading) {
+  transform: translateY(-2px) !important;
+}
+
+.logoutBtn.loading {
+  opacity: 0.9 !important;
+  cursor: not-allowed !important;
+  background-color: var(--error-400) !important;
+}
+
+/* Circle loader animation */
+.circleLoader {
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 50% !important;
+  border-top-color: white !important;
+  animation: spin 0.8s linear infinite !important;
+  display: inline-block !important;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .logoutBtn {
+    min-width: 70px !important;
+    width: 70px !important;
+    padding: var(--space-1) var(--space-2) !important;
+  }
+}

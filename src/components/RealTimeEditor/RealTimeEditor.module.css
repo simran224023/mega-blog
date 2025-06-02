@@ -1,0 +1,82 @@
+.rteContainer {
+  width: 100%;
+}
+
+.rteLabel {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-700);
+  margin-bottom: var(--space-3);
+}
+
+.editorWrapper {
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  background: white;
+}
+
+.editorWrapper:focus-within {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.errorText {
+  display: block;
+  color: var(--error-500);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  margin-top: var(--space-2);
+}
+
+/* TinyMCE Customization */
+:global(.tox-tinymce) {
+  border-radius: var(--radius-lg) !important;
+  border: none !important;
+}
+
+:global(.tox-editor-header) {
+  border-bottom: 1px solid var(--neutral-200) !important;
+  background: var(--neutral-50) !important;
+}
+
+:global(.tox-toolbar) {
+  background: var(--neutral-50) !important;
+  border: none !important;
+}
+
+:global(.tox-toolbar__group) {
+  border-color: var(--neutral-300) !important;
+}
+
+:global(.tox-tbtn) {
+  color: var(--neutral-700) !important;
+  border-radius: var(--radius-sm) !important;
+  margin: 2px !important;
+}
+
+:global(.tox-tbtn:hover) {
+  background: var(--primary-100) !important;
+  color: var(--primary-700) !important;
+}
+
+:global(.tox-tbtn--enabled) {
+  background: var(--primary-500) !important;
+  color: white !important;
+}
+
+:global(.tox-edit-area__iframe) {
+  background: white !important;
+}
+
+:global(.tox-statusbar) {
+  border-top: 1px solid var(--neutral-200) !important;
+  background: var(--neutral-50) !important;
+}
+
+:global(.tox-statusbar__text-container) {
+  color: var(--neutral-600) !important;
+  font-size: var(--text-xs) !important;
+}

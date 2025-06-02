@@ -1,0 +1,92 @@
+.logo {
+  display: inline-flex;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  /* gap: 8px; */
+  transition: all 0.2s ease;
+}
+
+.logoContainer:hover {
+  transform: scale(1.02);
+}
+
+.logoImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: #3b82f6;
+  letter-spacing: -0.025em;
+}
+
+/* Size Variants */
+.small .logoImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.small .logoText {
+  font-size: 16px;
+}
+
+.medium .logoImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.medium .logoText {
+  font-size: 20px;
+}
+
+.large .logoImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.large .logoText {
+  font-size: 24px;
+}
+
+
+.auth .logoText {
+  color: var(--primary-600);
+}
+.logoSvg {
+  width: 100%;
+  height: 100%;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.header .logoSvg {
+  color: #4299e1;
+}
+
+.footer .logoSvg {
+  color: white;
+}
+
+.logo:hover .logoSvg {
+  transform: rotate(180deg);
+}
+@media (max-width: 768px) {
+  .medium .logoImage {
+    width: 28px;
+    height: 28px;
+  }
+
+  .medium .logoText {
+    font-size: 18px;
+  }
+}
