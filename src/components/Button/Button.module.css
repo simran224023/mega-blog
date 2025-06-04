@@ -159,6 +159,30 @@
   outline: 2px solid var(--primary-500);
   outline-offset: 2px;
 }
+.loadingButton {
+  position: relative;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.circleLoader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {

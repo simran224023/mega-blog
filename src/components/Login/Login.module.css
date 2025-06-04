@@ -395,32 +395,6 @@
   animation-delay: 4s;
 }
 
-.loadingButton {
-  background-color: var(--primary-400) !important;
-  opacity: 0.85;
-  cursor: wait;
-}
-
-.circleLoader {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 0.8s linear infinite;
-  display: inline-block;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes logoGlow {
   0%,
   100% {
@@ -460,7 +434,7 @@
     width: 100%;
     padding: var(--space-6);
   }
-  
+
   .rightSection {
     width: 100%;
   }
@@ -522,11 +496,11 @@
   .inputWrapper {
     padding: 0;
   }
-  
+
   .input {
     padding: var(--space-3) var(--space-10) var(--space-3) var(--space-10);
   }
-  
+
   .authErrorMessage {
     padding: var(--space-3);
     font-size: var(--text-xs);
@@ -542,7 +516,7 @@
   .inputWrapper {
     border-width: 2px;
   }
-  
+
   .authErrorMessage {
     border-width: 2px;
   }

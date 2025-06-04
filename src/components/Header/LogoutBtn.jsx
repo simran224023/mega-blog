@@ -34,10 +34,10 @@ function LogoutBtn({ onLogoutSuccess }) {
       size="small"
       onClick={logoutHandler}
       disabled={loading}
-      className={`${styles.logoutBtn} ${loading ? styles.loading : ""}`}
-    >
-      {loading ? <div className={styles.circleLoader}></div> : <>⏻ Logout</>}
-    </Button>
+      loading={loading}
+      className={`${styles.logoutBtn}`}
+      children="⏻ Logout"
+    ></Button>
   );
 }
 

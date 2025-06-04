@@ -9,9 +9,13 @@ import { AuthLayout, Login } from "./components/index.js";
 import Home from "./Pages/Home/Home.jsx";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.jsx";
 import AllPosts from "./Pages/AllPosts/AllPosts.jsx";
+import MyPosts from "./Pages/MyPosts/MyPosts.jsx";
+import Profile from "./Pages/Profile/Profile.jsx";
+import Settings from "./Pages/Settings/Settings.jsx"; // Import Settings page
 import AddPost from "./Pages/AddPost/AddPost.jsx";
 import EditPost from "./Pages/EditPost/EditPost.jsx";
 import Post from "./Pages/Post/Post.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +50,31 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication>
             <AllPosts />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/my-posts",
+        element: (
+          <AuthLayout authentication>
+            <MyPosts />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <AuthLayout authentication>
+            <Profile />
+          </AuthLayout>
+        ),
+      },
+      // Add Settings route
+      {
+        path: "/settings",
+        element: (
+          <AuthLayout authentication>
+            <Settings />
           </AuthLayout>
         ),
       },

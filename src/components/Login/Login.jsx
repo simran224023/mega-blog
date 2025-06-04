@@ -28,16 +28,16 @@ function Login() {
     defaultValues: {
       email: "",
       password: "",
-    }
+    },
   });
 
   const loginUser = async (data) => {
     setLoading(true);
     setAuthError(null);
-    
+
     try {
       const session = await authService.login(data);
-      
+
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
@@ -52,21 +52,30 @@ function Login() {
       }
     } catch (err) {
       console.error("Login error:", err);
-      
+
       // Handle different types of errors
-      if (err.message.includes("Invalid credentials") || err.message.includes("Invalid password")) {
+      if (
+        err.message.includes("Invalid credentials") ||
+        err.message.includes("Invalid password")
+      ) {
         setError("password", {
           type: "manual",
-          message: "Incorrect password"
+          message: "Incorrect password",
         });
         setAuthError("password");
-      } else if (err.message.includes("not found") || err.message.includes("User not found")) {
+      } else if (
+        err.message.includes("not found") ||
+        err.message.includes("User not found")
+      ) {
         setError("email", {
           type: "manual",
-          message: "No account found with this email"
+          message: "No account found with this email",
         });
         setAuthError("email");
-      } else if (err.message.includes("too many requests") || err.message.includes("rate limit")) {
+      } else if (
+        err.message.includes("too many requests") ||
+        err.message.includes("rate limit")
+      ) {
         setAuthError("tooManyAttempts");
         error("Too many login attempts. Please try again later.");
       } else {
@@ -102,18 +111,28 @@ function Login() {
         {/* Right side - Form and Footer */}
         <div className={styles.rightSection}>
           {/* Form */}
-          <form onSubmit={handleSubmit(loginUser)} className={styles.loginForm} noValidate>
+          <form
+            onSubmit={handleSubmit(loginUser)}
+            className={styles.loginForm}
+            noValidate
+          >
             {authError === "unknown" && (
               <div className={styles.authErrorMessage}>
                 <FiAlertCircle />
-                <span>We couldn't sign you in. Please check your details and try again.</span>
+                <span>
+                  We couldn't sign you in. Please check your details and try
+                  again.
+                </span>
               </div>
             )}
-            
+
             {authError === "tooManyAttempts" && (
               <div className={styles.authErrorMessage}>
                 <FiAlertCircle />
-                <span>Too many login attempts. Please try again later or reset your password.</span>
+                <span>
+                  Too many login attempts. Please try again later or reset your
+                  password.
+                </span>
               </div>
             )}
 
@@ -121,7 +140,11 @@ function Login() {
               <label htmlFor="email" className={styles.label}>
                 Email Address
               </label>
-              <div className={`${styles.inputWrapper} ${errors.email ? styles.inputWrapperError : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  errors.email ? styles.inputWrapperError : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiMail />
                 </span>
@@ -132,7 +155,7 @@ function Login() {
                   className={styles.input}
                   autoComplete="email"
                   {...register("email", {
-                    required: "Email is required"
+                    required: "Email is required",
                   })}
                 />
               </div>
@@ -145,7 +168,11 @@ function Login() {
               <label htmlFor="password" className={styles.label}>
                 Password
               </label>
-              <div className={`${styles.inputWrapper} ${errors.password ? styles.inputWrapperError : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  errors.password ? styles.inputWrapperError : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiLock />
                 </span>
@@ -156,7 +183,7 @@ function Login() {
                   className={styles.input}
                   autoComplete="current-password"
                   {...register("password", {
-                    required: "Password is required"
+                    required: "Password is required",
                   })}
                 />
                 <button
@@ -183,8 +210,8 @@ function Login() {
 
             <div className={styles.formOptions}>
               <label className={styles.checkboxWrapper}>
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   className={styles.checkbox}
                   {...register("rememberMe")}
                 />
@@ -200,15 +227,10 @@ function Login() {
               variant="primary"
               size="large"
               fullWidth
-              className={loading ? styles.loadingButton : ""}
+              loading={loading || isSubmitting}
               disabled={loading || isSubmitting}
-            >
-              {loading ? (
-                <span className={styles.circleLoader}></span>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
+              children="Sign In"
+            ></Button>
 
             {/* Footer */}
             <div className={styles.loginFooter}>

@@ -1,0 +1,190 @@
+.pageContainer {
+  padding: var(--space-8) 0;
+  background: var(--neutral-50);
+  min-height: calc(100vh - 80px);
+}
+
+.profileContainer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--space-8);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--space-8);
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-right: var(--space-6);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.profileName {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--neutral-900);
+}
+
+.profileMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  color: var(--neutral-600);
+}
+
+.metaIcon {
+  margin-right: var(--space-2);
+  color: #3b82f6;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.profileSection {
+  background: white;
+  border-radius: 12px;
+  padding: var(--space-6);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin: 0;
+}
+
+.viewAllLink {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.viewAllLink:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.emptyPosts {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+.createPostButton {
+  display: inline-block;
+  background: #3b82f6;
+  color: white;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: var(--space-4);
+  transition: background-color 0.2s;
+}
+
+.createPostButton:hover {
+  background: #2563eb;
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.settingsOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+.settingsOption {
+  display: flex;
+  padding: var(--space-4);
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.settingsOption:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.optionIcon {
+  font-size: 1.5rem;
+  margin-right: var(--space-3);
+}
+
+.optionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-1);
+  color: var(--neutral-900);
+}
+
+.optionDescription {
+  font-size: 0.9rem;
+  color: var(--neutral-600);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profileImage {
+    margin: 0 0 var(--space-4);
+  }
+
+  .profileMeta {
+    justify-content: center;
+  }
+
+  .postsGrid,
+  .settingsOptions {
+    grid-template-columns: 1fr;
+  }
+}

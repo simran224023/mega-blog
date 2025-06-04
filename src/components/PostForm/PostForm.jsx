@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createPost, updatePost } from "../../store/postSlice";
 import appwriteService from "../../appwrite/config";
 import { useToast } from "../../hooks/useToast";
 import Button from "../Button/Button";
@@ -28,9 +29,11 @@ export default function PostForm({ post }) {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
+  const { loading } = useSelector((state) => state.posts);
   const { success, error } = useToast();
-  const [loading, setLoading] = useState(false);
+
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(
     post?.featuredImage ? appwriteService.getFileView(post.featuredImage) : null
@@ -46,10 +49,10 @@ export default function PostForm({ post }) {
     return "";
   }, []);
 
-  // Fix: Watch only the title field specifically
+  // Watch only the title field specifically
   useEffect(() => {
     const titleValue = watch("title");
-    
+
     // Only update slug when title changes
     if (titleValue) {
       setValue("slug", slugTransform(titleValue), { shouldValidate: true });
@@ -72,7 +75,6 @@ export default function PostForm({ post }) {
       return;
     }
 
-    setLoading(true);
     try {
       let fileId = null;
 
@@ -85,7 +87,6 @@ export default function PostForm({ post }) {
           }
         } else {
           error("Failed to upload image");
-          setLoading(false);
           return;
         }
       }
@@ -99,23 +100,24 @@ export default function PostForm({ post }) {
         userId: userData.$id,
       };
 
-      let dbPost;
       if (post) {
-        dbPost = await appwriteService.updatePost({
-          postId: post.$id,
-          ...postData,
-        });
-        if (dbPost) {
-          success("Post updated successfully!");
-          navigate(`/post/${dbPost.$id}`);
-        } else {
-          error("Failed to update post");
-        }
+        // Update existing post
+        await dispatch(
+          updatePost({
+            postId: post.$id,
+            ...postData,
+          })
+        ).unwrap();
+
+        success("Post updated successfully!");
+        navigate(`/post/${post.$id}`);
       } else {
-        dbPost = await appwriteService.createPost(postData);
-        if (dbPost) {
+        // Create new post
+        const newPost = await dispatch(createPost(postData)).unwrap();
+
+        if (newPost) {
           success("Post created successfully!");
-          navigate(`/post/${dbPost.$id}`);
+          navigate(`/post/${newPost.$id}`);
         } else {
           error("Failed to create post");
         }
@@ -123,8 +125,6 @@ export default function PostForm({ post }) {
     } catch (err) {
       console.error("Error submitting post:", err);
       error(post ? "Failed to update post" : "Failed to create post");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -146,18 +146,13 @@ export default function PostForm({ post }) {
           <div className={styles.headerRight}>
             <Button
               type="submit"
-              form="postForm" 
+              form="postForm"
               variant="primary"
               size="large"
-              className={loading ? styles.loadingButton : ""}
+              loading={loading}
               disabled={loading}
-            >
-              {loading ? (
-                <span className={styles.circleLoader}></span>
-              ) : (
-                <>{post ? "Update" : "Create"}</>
-              )}
-            </Button>
+              children={post ? "Update" : "Create"}
+            ></Button>
           </div>
         </div>
 
@@ -243,7 +238,6 @@ export default function PostForm({ post }) {
                               "Slug can only contain lowercase letters, numbers, and hyphens",
                           },
                         })}
-                        // Remove the onInput handler to avoid double updates
                       />
                       <div className={styles.urlPreview}>
                         <span>

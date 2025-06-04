@@ -2,9 +2,9 @@ import React from "react";
 import Loader from "../Loader/Loader";
 import styles from "./Button.module.css";
 
-const Button = ({ 
-  children, 
-  variant = "primary", 
+const Button = ({
+  children,
+  variant = "primary",
   size = "medium",
   loading = false,
   disabled = false,
@@ -14,19 +14,25 @@ const Button = ({
   icon,
   fullWidth = false,
   loadingText = "Processing...",
-  ...props 
+  ...props
 }) => {
+  console.log(className);
   const buttonClass = [
     styles.btn,
     styles[variant],
     styles[size],
     fullWidth && styles.fullWidth,
     loading && styles.loading,
-    className
-  ].filter(Boolean).join(" ");
+    loading && styles.loadingButton,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const isDisabled = disabled || loading;
-
+  console.log("isDisabled", isDisabled);
+  console.log("buttonClass", buttonClass);
+  console.log("loading", loading);
   return (
     <button
       className={buttonClass}
@@ -35,7 +41,7 @@ const Button = ({
       type={type}
       {...props}
     >
-      {loading ? (
+      {/* {loading ? (
         <>
           <Loader variant="button" size="small" />
           <span className={styles.loadingText}>{loadingText}</span>
@@ -43,9 +49,11 @@ const Button = ({
       ) : (
         <>
           {icon && <span className={styles.buttonIcon}>{icon}</span>}
+
           {children}
         </>
-      )}
+      )} */}
+      {loading ? <span className={styles.circleLoader}></span> : children}
     </button>
   );
 };

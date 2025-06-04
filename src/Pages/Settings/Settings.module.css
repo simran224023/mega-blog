@@ -1,0 +1,270 @@
+/* Settings Page Container */
+.pageContainer {
+  width: 100%;
+  padding: 1.5rem 0;
+  color: var(--text-primary);
+}
+
+.settingsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settingsHeader {
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.pageDescription {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Settings Tabs */
+.settingsTabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.tabButton {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.tabButton::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.tabButton:hover {
+  color: var(--primary-600);
+}
+
+.tabButton.active {
+  color: var(--primary-600);
+}
+
+.tabButton.active::after {
+  background-color: var(--primary-600);
+}
+
+/* Settings Form */
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.settingsSection {
+  background-color: var(--background-secondary);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--neutral-300, #d1d5db);
+  border-radius: var(--radius-lg, 8px);
+  font-size: var(--text-base, 1rem);
+  font-family: inherit;
+  background-color: var(--input-background);
+  color: var(--input-text);
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-500, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: var(--primary-50, #eff6ff);
+}
+
+.input:disabled {
+  background-color: var(--neutral-100, #f3f4f6);
+  border-color: var(--neutral-300, #d1d5db);
+  color: var(--neutral-500, #6b7280);
+  cursor: not-allowed;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.fieldNote {
+  font-size: 0.8125rem;
+  color: var(--neutral-500, #6b7280);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Checkbox Styles */
+.checkboxGroup {
+  margin-bottom: 1.5rem;
+}
+
+.checkboxGroupTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.75rem;
+  accent-color: var(--primary-600, #2563eb);
+  cursor: pointer;
+}
+
+.checkbox label {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Form Actions */
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.formActions button {
+  min-width: 120px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .settingsForm {
+    gap: 1.5rem;
+  }
+
+  .settingsSection {
+    padding: 1.25rem;
+  }
+
+  .formActions {
+    justify-content: center;
+  }
+
+  .formActions button {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .settingsTabs {
+    gap: 0.5rem;
+  }
+
+  .tabButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .settingsSection {
+    padding: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+
+  .input,
+  .textarea {
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .settingsSection {
+    border: 2px solid var(--neutral-900);
+  }
+
+  .input,
+  .textarea {
+    border-width: 2px;
+  }
+
+  .settingsTabs {
+    border-bottom-width: 2px;
+  }
+
+  .tabButton.active::after {
+    height: 3px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .textarea,
+  .tabButton {
+    transition: none;
+  }
+}

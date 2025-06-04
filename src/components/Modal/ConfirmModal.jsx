@@ -45,14 +45,9 @@ const ConfirmModal = ({
             variant="danger"
             onClick={onConfirm}
             disabled={loading}
-            className={loading ? styles.loadingButton : ""}
-          >
-            {loading ? (
-              <span className={styles.circleLoader}></span>
-            ) : (
-              <> {confirmText}</>
-            )}
-          </Button>
+            loading={loading}
+            children={confirmText}
+          ></Button>
         </div>
       </div>
     </div>,

@@ -15,6 +15,11 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
+  // Helper function for filtering by userId
+  getFilterByUserId(userId) {
+    return Query.equal("userId", userId);
+  }
+
   async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
       return await this.databases.createDocument(

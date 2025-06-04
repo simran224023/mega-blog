@@ -8,7 +8,15 @@ import { useToast } from "../../hooks/useToast";
 import Button from "../Button/Button";
 import Loader from "../Loader/Loader";
 import styles from "./Register.module.css";
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiCheck, FiX } from "react-icons/fi";
+import {
+  FiUser,
+  FiMail,
+  FiLock,
+  FiEye,
+  FiEyeOff,
+  FiCheck,
+  FiX,
+} from "react-icons/fi";
 
 function Register() {
   const navigate = useNavigate();
@@ -58,7 +66,7 @@ function Register() {
         hasLowercase: /[a-z]/.test(password),
         hasNumber: /\d/.test(password),
       };
-      
+
       // Calculate score based on criteria (0-4)
       strength.score = [
         strength.hasMinLength,
@@ -66,7 +74,7 @@ function Register() {
         strength.hasLowercase,
         strength.hasNumber,
       ].filter(Boolean).length;
-      
+
       setPasswordStrength(strength);
     } else {
       setPasswordStrength({
@@ -80,11 +88,13 @@ function Register() {
   }, [password]);
 
   // Check password match in real-time
-  const passwordsMatch = password && confirmPassword && password === confirmPassword;
+  const passwordsMatch =
+    password && confirmPassword && password === confirmPassword;
   const passwordMismatch = confirmPassword && password !== confirmPassword;
 
   // Email validation regex
-  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const isEmailValid = email && emailRegex.test(email);
   const isEmailInvalid = email && !emailRegex.test(email);
 
@@ -132,7 +142,7 @@ function Register() {
             <h2 className={styles.title}>Create Account</h2>
             <p className={styles.subtitle}>Join our community of writers</p>
           </div>
-          
+
           {/* Decorative Elements */}
           <div className={styles.decorativeElements}>
             <div className={styles.circle1}></div>
@@ -152,7 +162,15 @@ function Register() {
               <label htmlFor="name" className={styles.label}>
                 Full Name
               </label>
-              <div className={`${styles.inputWrapper} ${errors.name ? styles.inputWrapperError : dirtyFields.name ? styles.inputWrapperSuccess : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  errors.name
+                    ? styles.inputWrapperError
+                    : dirtyFields.name
+                    ? styles.inputWrapperSuccess
+                    : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiUser />
                 </span>
@@ -177,7 +195,9 @@ function Register() {
                   autoComplete="name"
                 />
                 {dirtyFields.name && !errors.name && (
-                  <span className={styles.validIcon}><FiCheck /></span>
+                  <span className={styles.validIcon}>
+                    <FiCheck />
+                  </span>
                 )}
               </div>
               {errors.name && (
@@ -189,7 +209,15 @@ function Register() {
               <label htmlFor="email" className={styles.label}>
                 Email Address
               </label>
-              <div className={`${styles.inputWrapper} ${isEmailInvalid ? styles.inputWrapperError : isEmailValid ? styles.inputWrapperSuccess : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  isEmailInvalid
+                    ? styles.inputWrapperError
+                    : isEmailValid
+                    ? styles.inputWrapperSuccess
+                    : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiMail />
                 </span>
@@ -210,17 +238,23 @@ function Register() {
                   autoComplete="email"
                 />
                 {isEmailValid && (
-                  <span className={styles.validIcon}><FiCheck /></span>
+                  <span className={styles.validIcon}>
+                    <FiCheck />
+                  </span>
                 )}
                 {isEmailInvalid && (
-                  <span className={styles.invalidIcon}><FiX /></span>
+                  <span className={styles.invalidIcon}>
+                    <FiX />
+                  </span>
                 )}
               </div>
               {errors.email && (
                 <span className={styles.errorText}>{errors.email.message}</span>
               )}
               {isEmailInvalid && !errors.email && (
-                <span className={styles.errorText}>Please enter a valid email address</span>
+                <span className={styles.errorText}>
+                  Please enter a valid email address
+                </span>
               )}
             </div>
 
@@ -228,7 +262,15 @@ function Register() {
               <label htmlFor="password" className={styles.label}>
                 Password
               </label>
-              <div className={`${styles.inputWrapper} ${errors.password ? styles.inputWrapperError : passwordStrength.score >= 3 ? styles.inputWrapperSuccess : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  errors.password
+                    ? styles.inputWrapperError
+                    : passwordStrength.score >= 3
+                    ? styles.inputWrapperSuccess
+                    : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiLock />
                 </span>
@@ -265,10 +307,38 @@ function Register() {
               {password && (
                 <div className={styles.passwordStrengthMeter}>
                   <div className={styles.strengthBars}>
-                    <div className={`${styles.strengthBar} ${passwordStrength.score >= 1 ? styles.strengthActive : ""} ${passwordStrength.score === 1 ? styles.strengthWeak : ""}`}></div>
-                    <div className={`${styles.strengthBar} ${passwordStrength.score >= 2 ? styles.strengthActive : ""} ${passwordStrength.score === 2 ? styles.strengthMedium : ""}`}></div>
-                    <div className={`${styles.strengthBar} ${passwordStrength.score >= 3 ? styles.strengthActive : ""} ${passwordStrength.score === 3 ? styles.strengthGood : ""}`}></div>
-                    <div className={`${styles.strengthBar} ${passwordStrength.score >= 4 ? styles.strengthActive : ""} ${passwordStrength.score === 4 ? styles.strengthStrong : ""}`}></div>
+                    <div
+                      className={`${styles.strengthBar} ${
+                        passwordStrength.score >= 1 ? styles.strengthActive : ""
+                      } ${
+                        passwordStrength.score === 1 ? styles.strengthWeak : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`${styles.strengthBar} ${
+                        passwordStrength.score >= 2 ? styles.strengthActive : ""
+                      } ${
+                        passwordStrength.score === 2
+                          ? styles.strengthMedium
+                          : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`${styles.strengthBar} ${
+                        passwordStrength.score >= 3 ? styles.strengthActive : ""
+                      } ${
+                        passwordStrength.score === 3 ? styles.strengthGood : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`${styles.strengthBar} ${
+                        passwordStrength.score >= 4 ? styles.strengthActive : ""
+                      } ${
+                        passwordStrength.score === 4
+                          ? styles.strengthStrong
+                          : ""
+                      }`}
+                    ></div>
                   </div>
                   <span className={styles.strengthLabel}>
                     {passwordStrength.score === 0 && "Too weak"}
@@ -281,25 +351,41 @@ function Register() {
               )}
               {password && (
                 <div className={styles.passwordRequirements}>
-                  <div className={`${styles.requirement} ${passwordStrength.hasMinLength ? styles.requirementMet : ""}`}>
+                  <div
+                    className={`${styles.requirement} ${
+                      passwordStrength.hasMinLength ? styles.requirementMet : ""
+                    }`}
+                  >
                     <span className={styles.requirementIcon}>
                       {passwordStrength.hasMinLength ? <FiCheck /> : <FiX />}
                     </span>
                     <span>At least 8 characters</span>
                   </div>
-                  <div className={`${styles.requirement} ${passwordStrength.hasUppercase ? styles.requirementMet : ""}`}>
+                  <div
+                    className={`${styles.requirement} ${
+                      passwordStrength.hasUppercase ? styles.requirementMet : ""
+                    }`}
+                  >
                     <span className={styles.requirementIcon}>
                       {passwordStrength.hasUppercase ? <FiCheck /> : <FiX />}
                     </span>
                     <span>At least 1 uppercase letter</span>
                   </div>
-                  <div className={`${styles.requirement} ${passwordStrength.hasLowercase ? styles.requirementMet : ""}`}>
+                  <div
+                    className={`${styles.requirement} ${
+                      passwordStrength.hasLowercase ? styles.requirementMet : ""
+                    }`}
+                  >
                     <span className={styles.requirementIcon}>
                       {passwordStrength.hasLowercase ? <FiCheck /> : <FiX />}
                     </span>
                     <span>At least 1 lowercase letter</span>
                   </div>
-                  <div className={`${styles.requirement} ${passwordStrength.hasNumber ? styles.requirementMet : ""}`}>
+                  <div
+                    className={`${styles.requirement} ${
+                      passwordStrength.hasNumber ? styles.requirementMet : ""
+                    }`}
+                  >
                     <span className={styles.requirementIcon}>
                       {passwordStrength.hasNumber ? <FiCheck /> : <FiX />}
                     </span>
@@ -318,7 +404,15 @@ function Register() {
               <label htmlFor="confirmPassword" className={styles.label}>
                 Confirm Password
               </label>
-              <div className={`${styles.inputWrapper} ${passwordMismatch ? styles.inputWrapperError : passwordsMatch ? styles.inputWrapperSuccess : ""}`}>
+              <div
+                className={`${styles.inputWrapper} ${
+                  passwordMismatch
+                    ? styles.inputWrapperError
+                    : passwordsMatch
+                    ? styles.inputWrapperSuccess
+                    : ""
+                }`}
+              >
                 <span className={styles.inputIcon}>
                   <FiLock />
                 </span>
@@ -337,10 +431,14 @@ function Register() {
                   autoComplete="new-password"
                 />
                 {passwordsMatch && (
-                  <span className={styles.validIcon}><FiCheck /></span>
+                  <span className={styles.validIcon}>
+                    <FiCheck />
+                  </span>
                 )}
                 {passwordMismatch && (
-                  <span className={styles.invalidIcon}><FiX /></span>
+                  <span className={styles.invalidIcon}>
+                    <FiX />
+                  </span>
                 )}
               </div>
               {errors.confirmPassword && (
@@ -349,9 +447,7 @@ function Register() {
                 </span>
               )}
               {passwordMismatch && !errors.confirmPassword && (
-                <span className={styles.errorText}>
-                  Passwords do not match
-                </span>
+                <span className={styles.errorText}>Passwords do not match</span>
               )}
             </div>
 
@@ -385,16 +481,11 @@ function Register() {
               variant="primary"
               size="large"
               fullWidth
-              className={loading ? styles.loadingButton : ""}
+              loading={loading}
               disabled={loading}
-            >
-              {loading ? (
-                <span className={styles.circleLoader}></span>
-              ) : (
-                "Create Account"
-              )}
-            </Button>
-            
+              children="Create Account"
+            ></Button>
+
             {/* Footer integrated into the right section */}
             <div className={styles.registerFooter}>
               <p className={styles.footerText}>

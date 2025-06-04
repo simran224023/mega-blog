@@ -1,25 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../store/postSlice";
+import { fetchUserPosts } from "../../store/postSlice";
 import { Card, Container } from "../../components";
 import Loader from "../../components/Loader/Loader";
-import styles from "./AllPosts.module.css";
+import styles from "./MyPosts.module.css";
 import "../styles.css";
 
-const AllPosts = () => {
+const MyPosts = () => {
   const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => state.posts);
+  const { userPosts, loading } = useSelector((state) => state.posts);
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    if (userData) {
+      dispatch(fetchUserPosts(userData.$id));
+    }
+  }, [dispatch, userData]);
 
   if (loading) {
     return (
       <Loader
         variant="logo"
         fullScreen
-        text="Loading amazing content..."
+        text="Loading your posts..."
         size="large"
       />
     );
@@ -30,28 +33,28 @@ const AllPosts = () => {
       <div className={styles.editorContainer}>
         <div className={styles.editorHeader}>
           <div className={styles.headerLeft}>
-            <h1 className={styles.pageTitle}>All Posts</h1>
+            <h1 className={styles.pageTitle}>My Posts</h1>
             <p className={styles.pageSubtitle}>
-              Discover all the amazing content from our community
+              Manage all your created content in one place
             </p>
           </div>
         </div>
       </div>
       <Container>
         <div className={styles.contentWrapper}>
-          {posts.length === 0 ? (
+          {userPosts.length === 0 ? (
             <div className={styles.enhancedEmptyState}>
               <div className={styles.emptyStateIconWrapper}>
                 <span className={styles.emptyStateIcon}>📝</span>
               </div>
-              <h2 className={styles.emptyStateTitle}>No posts found</h2>
+              <h2 className={styles.emptyStateTitle}>No posts yet</h2>
               <p className={styles.emptyStateText}>
-                Be the first to create a post and share your thoughts!
+                You haven't created any posts yet. Start sharing your thoughts with the world!
               </p>
             </div>
           ) : (
             <div className={styles.enhancedPostsGrid}>
-              {posts.map((post) => (
+              {userPosts.map((post) => (
                 <Card key={post.$id} {...post} variant="enhanced" />
               ))}
             </div>
@@ -62,4 +65,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default MyPosts;

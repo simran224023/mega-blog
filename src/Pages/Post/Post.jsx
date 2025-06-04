@@ -1,62 +1,73 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostById, deletePost } from "../../store/postSlice";
 import appwriteService from "../../appwrite/config";
 import { Container } from "../../components";
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
 import { useToast } from "../../hooks/useToast";
-import Button from "../../components/Button/Button";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import Loader from "../../components/Loader/Loader";
 import styles from "./Post.module.css";
 import "../styles.css";
+import { FiCalendar, FiUser, FiEdit, FiTrash2 } from "react-icons/fi";
 
 export default function Post() {
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { slug } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { slug } = useParams();
   const { success, error } = useToast();
 
+  const { currentPost: post, loading } = useSelector((state) => state.posts);
   const userData = useSelector((state) => state.auth.userData);
+  const { displayPreferences } = useSelector((state) => state.userPreferences);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [authorName, setAuthorName] = useState("");
+
+  // Strict check to ensure current user is the author
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   useEffect(() => {
     if (slug) {
-      appwriteService
-        .getPost(slug)
-        .then((post) => {
-          if (post) {
-            setPost(post);
-          } else {
-            error("Post not found");
-            navigate("/");
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          error("Failed to load post");
-          navigate("/");
-          setLoading(false);
-        });
+      dispatch(fetchPostById(slug));
     } else {
       navigate("/");
     }
-  }, [slug, navigate, success, error]);
+  }, [slug, dispatch, navigate]);
+
+  // Format creation date
+  const formatCreationDate = () => {
+    if (!post?.$createdAt) return "";
+    const date = new Date(post.$createdAt);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Set author name
+  useEffect(() => {
+    if (post && userData) {
+      if (post.userId === userData.$id) {
+        setAuthorName("You");
+      } else {
+        // For a real app, you'd want to implement a function to get user by ID
+        setAuthorName(`User ${post.userId.substring(0, 6)}`);
+      }
+    }
+  }, [post, userData]);
 
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      const status = await appwriteService.deletePost(post.$id);
-      if (status) {
-        await appwriteService.deleteFile(post.featuredImage);
-        success("Post deleted successfully!");
-        navigate("/");
-      } else {
-        error("Failed to delete post");
-      }
+      await dispatch(
+        deletePost({ postId: post.$id, featuredImage: post.featuredImage })
+      ).unwrap();
+      success("Post deleted successfully!");
+      navigate("/");
     } catch (err) {
       error("Failed to delete post");
       console.error("Delete error:", err);
@@ -65,6 +76,11 @@ export default function Post() {
       setShowDeleteModal(false);
     }
   };
+
+  // Apply compact view class if enabled
+  const contentClass = displayPreferences?.compactView
+    ? `${styles.postContent} ${styles.compactContent}`
+    : styles.postContent;
 
   if (loading) {
     return (
@@ -89,32 +105,42 @@ export default function Post() {
                   }}
                 />
               )}
-
-              {isAuthor && (
-                <div className={styles.postActions}>
-                  <Link to={`/edit-post/${post.$id}`}>
-                    <Button variant="success" size="small">
-                      Edit
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="danger"
-                    size="small"
-                    onClick={() => setShowDeleteModal(true)}
-                    disabled={loading}
-                    className={`${loading ? styles.loading : ""}`}
-                  >
-                    Delete
-                  </Button>
+              
+              <div className={styles.postImageMeta}>
+                <div className={styles.dateDisplay}>
+                  <FiCalendar className={styles.metaIcon} />
+                  <span>{formatCreationDate()}</span>
                 </div>
-              )}
+                
+                {/* Edit and delete icons */}
+                {isAuthor && (
+                  <div className={styles.iconActions}>
+                    <Link to={`/edit-post/${post.$id}`}>
+                      <FiEdit className={styles.actionIcon} />
+                    </Link>
+                    <FiTrash2 
+                      className={styles.actionIcon} 
+                      onClick={() => setShowDeleteModal(true)}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className={styles.postHeader}>
               <h1 className={styles.postTitle}>{post.title}</h1>
+
+              <div className={styles.postMeta}>
+                <div className={styles.metaItem}>
+                  <FiUser className={styles.metaIcon} />
+                  <span className={styles.metaText}>
+                    By <strong>{authorName}</strong>
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className={styles.postContent}>{parse(post.content)}</div>
+            <div className={contentClass}>{parse(post.content)}</div>
           </div>
         </Container>
       </div>

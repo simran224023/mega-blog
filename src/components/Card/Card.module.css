@@ -8,6 +8,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 380px;
 }
 
 .card:hover {
@@ -32,6 +33,7 @@
   width: 100%;
   height: 100%;
   transition: transform 0.3s ease;
+  object-fit: cover;
 }
 
 .card:hover .cardImage {
@@ -120,6 +122,34 @@
   color: var(--primary-600);
 }
 
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.authorInfo,
+.dateInfo {
+  display: flex;
+  align-items: center;
+}
+
+.metaIcon {
+  margin-right: 5px;
+  font-size: 0.85rem;
+}
+
+.authorName {
+  font-weight: 500;
+}
+
+.postDate {
+  font-style: italic;
+}
+
 .cardFooter {
   margin-top: auto;
   padding-top: var(--space-4);
@@ -129,9 +159,109 @@
   text-decoration: none;
 }
 
+/* IMPROVED Compact card styles */
+.compactCard {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: auto !important; /* Allow height to adjust to content */
+  min-height: 180px;
+  overflow: visible !important; /* Allow content to be fully visible */
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.compactCard .imageContainer {
+  flex: 0 0 160px; /* Reduced from 180px */
+  max-width: 160px;
+  height: auto;
+  min-height: 180px;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  overflow: hidden;
+}
+
+.compactCard .cardContent {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: visible !important;
+  justify-content: space-between;
+}
+
+/* COMPLETELY FIXED Title display */
+.compactCard .cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  display: block !important; /* Force block display */
+  -webkit-line-clamp: initial !important; /* Remove line clamping */
+  -webkit-box-orient: initial !important;
+  overflow: visible !important; /* Make sure text isn't cut off */
+  line-height: 1.4;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  max-height: none !important; /* Remove height restriction */
+  width: 100%;
+  white-space: normal !important; /* Force text wrapping */
+  text-overflow: clip !important; /* Don't truncate with ellipsis */
+}
+
+/* Force the link to respect the width constraint */
+.compactCard .titleLink {
+  display: inline !important;
+  word-break: break-word !important;
+}
+
+.compactCard .cardMeta {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.compactCard .cardFooter {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.compactCardActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  display: flex;
+  z-index: 10;
+}
+.iconButton {
+  color: #171717;
+  cursor: pointer;
+  padding: 2px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButton:hover {
+  transform: scale(1.1);
+}
+
 @keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 /* Responsive Design */
@@ -150,6 +280,33 @@
 
   .cardActions {
     opacity: 1; /* Always visible on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .compactCard {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .compactCard .imageContainer {
+    width: 100%;
+    flex: none;
+    max-width: 100%;
+    height: 180px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .compactCard .cardTitle {
+    font-size: 1.1rem;
+    margin-top: var(--space-2);
+  }
+
+  /* Ensure card meta is stacked on very small screens */
+  .compactCard .cardMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 }
 

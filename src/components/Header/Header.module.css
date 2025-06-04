@@ -139,6 +139,33 @@
   white-space: nowrap;
 }
 
+.userSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.userAvatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 .mobileMenuButton {
   display: none;
   background: none;
@@ -171,7 +198,7 @@
   .navContent {
     gap: var(--space-4);
   }
-  
+
   .userName {
     display: none;
   }
@@ -181,15 +208,15 @@
   .header {
     height: 64px;
   }
-  
+
   .nav {
     height: 64px;
   }
-  
+
   .mobileMenuButton {
     display: block;
   }
-  
+
   .navList {
     position: fixed;
     top: 64px;
@@ -207,25 +234,25 @@
     transform: translateY(-10px);
     transition: all 0.3s ease;
   }
-  
+
   .navList.mobileOpen {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
-  
+
   .navButton {
     width: 100%;
     text-align: left;
     padding: var(--space-3) var(--space-4);
     justify-content: flex-start;
   }
-  
+
   .userSection {
     gap: var(--space-2);
     padding: var(--space-1) var(--space-3);
   }
-  
+
   .userAvatar {
     width: 28px;
     height: 28px;
@@ -237,7 +264,7 @@
   .nav {
     padding: 0 var(--space-3);
   }
-  
+
   .navList {
     left: var(--space-3);
     right: var(--space-3);
