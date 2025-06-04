@@ -1,13 +1,13 @@
 .pageContainer {
   /* min-height: 100vh; */
-  background: #fafafa;
+  background: var(--neutral-50);
   padding: 0;
 }
 
 .editorContainer {
   max-width: 1400px;
   margin: 0 auto;
-  background: white;
+  background: var(--card-bg);
   /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
@@ -19,8 +19,8 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-4) var(--space-6);
-  border-bottom: 1px solid #e5e7eb;
-  background: white;
+  border-bottom: 1px solid var(--neutral-950);
+  background: var(--card-bg);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -67,13 +67,13 @@
 .editorMain {
   display: flex;
   flex-direction: column;
-  background: white;
-  border-right: 1px solid #e5e7eb;
+  background: var(--card-bg);
+  border-right: 1px solid var(--neutral-950);
 }
 
 .titleSection {
   padding: var(--space-8) var(--space-8) var(--space-4);
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--neutral-60);
 }
 
 .titleInput {
@@ -108,8 +108,8 @@
 
 /* Sidebar */
 .editorSidebar {
-  background: #f9fafb;
-  border-left: 1px solid #e5e7eb;
+  background: var(--neutral-75);
+  border-left: 1px solid var(--neutral-950);
   overflow-y: auto;
 }
 
@@ -121,8 +121,8 @@
 }
 
 .sidebarCard {
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: var(--card-bg);
+  border: 1px solid var(--neutral-950);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
@@ -133,8 +133,8 @@
   color: var(--neutral-900);
   margin: 0;
   padding: var(--space-4) var(--space-5);
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--neutral-75);
+  border-bottom: 1px solid var(--neutral-950);
 }
 
 .cardContent {
@@ -162,10 +162,10 @@
 .fieldInput {
   width: 100%;
   padding: var(--space-3);
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--neutral-350);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
-  background: white;
+  background: var(--card-bg);
   color: var(--neutral-900);
   transition: all 0.2s ease;
 }
@@ -173,16 +173,16 @@
 .fieldInput:focus {
   outline: none;
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px var(--border-color-1);
 }
 
 .fieldSelect {
   width: 100%;
   padding: var(--space-3);
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--neutral-350);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
-  background: white;
+  background: var(--card-bg);
   color: var(--neutral-900);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -191,13 +191,13 @@
 .fieldSelect:focus {
   outline: none;
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px var(--border-color-1);
 }
 
 .urlPreview {
   margin-top: var(--space-2);
   padding: var(--space-2);
-  background: #f3f4f6;
+  background: var(--neutral-60);
   border-radius: var(--radius-sm);
   font-size: var(--text-xs);
   color: var(--neutral-600);
@@ -246,13 +246,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--border-op-07);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.2s ease;
-  color: white;
+  color: var(--card-bg);
   font-size: var(--text-sm);
   font-weight: 600;
 }
@@ -264,7 +264,7 @@
 .uploadPlaceholder {
   width: 100%;
   height: 140px;
-  border: 2px dashed #d1d5db;
+  border: 2px dashed var(--neutral-350);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
@@ -272,7 +272,7 @@
   justify-content: center;
   gap: var(--space-2);
   color: var(--neutral-500);
-  background: #fafafa;
+  background: var(--neutral-50);
   transition: all 0.2s ease;
 }
 
@@ -293,7 +293,7 @@
 
 .error:focus {
   border-color: var(--error-500) !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+  box-shadow: 0 0 0 3px var(--border-color-10) !important;
 }
 
 .errorMessage {
@@ -311,7 +311,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-transparent-7);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -327,7 +327,7 @@
 
   .editorSidebar {
     border-left: none;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--neutral-950);
     order: 2;
   }
 

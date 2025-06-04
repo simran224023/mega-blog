@@ -22,11 +22,12 @@
   margin-bottom: 1.5rem;
 }
 
-.securityCard, .sessionsCard {
+.securityCard,
+.sessionsCard {
   background-color: var(--background-secondary);
   border-radius: 10px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--border-op-01);
   border: 1px solid var(--border-color);
 }
 
@@ -64,46 +65,46 @@
   position: relative;
   display: flex;
   align-items: center;
-  border: 2px solid var(--neutral-300, #d1d5db);
+  border: 2px solid var(--neutral-300, var(--neutral-350));
   border-radius: var(--radius-lg, 8px);
   transition: all 0.2s ease;
   background-color: var(--input-background);
 }
 
 .inputWrapper:focus-within {
-  border-color: var(--primary-500, #3b82f6);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  background: var(--primary-50, #eff6ff);
+  border-color: var(--primary-500, var(--primary-500));
+  box-shadow: 0 0 0 3px var(--border-color-1);
+  background: var(--primary-50, var(--primary-50));
 }
 
 /* Input validation states */
 .inputWrapperSuccess {
-  border-color: var(--success-500, #22c55e);
+  border-color: var(--success-500, var(--success-500));
 }
 
 .inputWrapperSuccess:focus-within {
-  border-color: var(--success-500, #22c55e);
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  border-color: var(--success-500, var(--success-500));
+  box-shadow: 0 0 0 3px var(--border-color-12);
 }
 
 .inputWrapperError {
-  border-color: var(--error-500, #ef4444);
+  border-color: var(--error-500, var(--error-500));
 }
 
 .inputWrapperError:focus-within {
-  border-color: var(--error-500, #ef4444);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: var(--error-500, var(--error-500));
+  box-shadow: 0 0 0 3px var(--border-color-10);
 }
 
 .inputWrapperNeutral {
-  border-color: var(--neutral-400, #9ca3af);
+  border-color: var(--neutral-400, var(--neutral-610));
 }
 
 .inputIcon {
   position: absolute;
   left: 1rem;
   z-index: 2;
-  color: var(--neutral-500, #6b7280);
+  color: var(--neutral-500, var(--neutral-450));
   font-size: 1.25rem;
   display: flex;
   align-items: center;
@@ -120,7 +121,7 @@
   background: transparent;
   transition: all 0.2s ease;
   line-height: 1.5;
-  color: var(--neutral-800, #1f2937);
+  color: var(--neutral-800, var(--primary-920));
 }
 
 .input:focus {
@@ -128,7 +129,7 @@
 }
 
 .input::placeholder {
-  color: var(--neutral-400, #9ca3af);
+  color: var(--neutral-400, var(--neutral-610));
 }
 
 /* Password toggle button */
@@ -141,7 +142,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  color: var(--neutral-500, #6b7280);
+  color: var(--neutral-500, var(--neutral-450));
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
@@ -150,8 +151,8 @@
 }
 
 .passwordToggle:hover {
-  background: var(--neutral-100, #f3f4f6);
-  color: var(--primary-600, #2563eb);
+  background: var(--neutral-100, var(--neutral-60));
+  color: var(--primary-600, var(--primary-600));
 }
 
 /* Validation icons */
@@ -167,17 +168,17 @@
 }
 
 .validIcon {
-  color: var(--success-500, #22c55e);
+  color: var(--success-500, var(--success-500));
 }
 
 .invalidIcon {
-  color: var(--error-500, #ef4444);
+  color: var(--error-500, var(--error-500));
 }
 
 /* Error text */
 .errorText {
   display: block;
-  color: var(--error-500, #ef4444);
+  color: var(--error-500, var(--error-500));
   font-size: 0.875rem;
   font-weight: 500;
   margin-top: 0.5rem;
@@ -201,29 +202,29 @@
 .strengthBar {
   height: 4px;
   flex: 1;
-  background-color: var(--neutral-200, #e5e7eb);
+  background-color: var(--neutral-200, var(--neutral-950));
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
 .strengthActive {
-  background-color: var(--success-500, #22c55e);
+  background-color: var(--success-500, var(--success-500));
 }
 
 .strengthWeak {
-  background-color: var(--error-500, #ef4444);
+  background-color: var(--error-500, var(--error-500));
 }
 
 .strengthMedium {
-  background-color: var(--warning-500, #f59e0b);
+  background-color: var(--warning-500, var(--warning-500));
 }
 
 .strengthGood {
-  background-color: var(--info-500, #3b82f6);
+  background-color: var(--info-500, var(--primary-500));
 }
 
 .strengthStrong {
-  background-color: var(--success-500, #22c55e);
+  background-color: var(--success-500, var(--success-500));
 }
 
 .strengthLabel {
@@ -231,7 +232,7 @@
   font-weight: 600;
   min-width: 50px;
   text-align: right;
-  color: var(--neutral-700, #374151);
+  color: var(--neutral-700, var(--primary-520));
 }
 
 /* Password requirements */
@@ -240,17 +241,17 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
-  background-color: var(--neutral-50, #f9fafb);
+  background-color: var(--neutral-50, var(--neutral-75));
   border-radius: 8px;
   padding: 0.75rem;
-  border: 1px solid var(--neutral-200, #e5e7eb);
+  border: 1px solid var(--neutral-200, var(--neutral-950));
 }
 
 .requirement {
   display: flex;
   align-items: center;
   font-size: 0.75rem;
-  color: var(--neutral-600, #4b5563);
+  color: var(--neutral-600, var(--neutral-420));
 }
 
 .requirementIcon {
@@ -258,16 +259,16 @@
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
-  color: var(--error-500, #ef4444);
+  color: var(--error-500, var(--error-500));
   font-size: 1rem;
 }
 
 .requirementMet {
-  color: var(--success-600, #16a34a);
+  color: var(--success-600, var(--success-600));
 }
 
 .requirementMet .requirementIcon {
-  color: var(--success-500, #22c55e);
+  color: var(--success-500, var(--success-500));
 }
 
 .actionButton {
@@ -277,13 +278,13 @@
 }
 .fieldNote {
   font-size: 0.8125rem;
-  color: var(--neutral-500, #6b7280);
+  color: var(--neutral-500, var(--neutral-450));
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
 
 .securityWarning {
-  color: var(--warning-600, #d97706);
+  color: var(--warning-600, var(--warning-600));
   font-weight: 500;
 }
 /* Responsive Design */
@@ -291,7 +292,7 @@
   .securityGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .passwordRequirements {
     grid-template-columns: 1fr;
   }
@@ -301,20 +302,20 @@
   .securityCard {
     padding: 1rem;
   }
-  
+
   .input {
     padding: 0.75rem 2.5rem 0.75rem 2.5rem;
   }
-  
+
   .passwordStrengthMeter {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .strengthBars {
     width: 100%;
   }
-  
+
   .strengthLabel {
     text-align: left;
     margin-top: 0.25rem;
@@ -326,15 +327,15 @@
   .securityCard {
     border: 2px solid var(--neutral-900);
   }
-  
+
   .inputWrapper {
     border-width: 2px;
   }
-  
+
   .requirement {
     color: var(--neutral-900);
   }
-  
+
   .requirementMet {
     color: var(--success-700);
   }
@@ -343,15 +344,15 @@
 .securityWarningBox {
   display: flex;
   align-items: flex-start;
-  background-color: var(--warning-50, #fffbeb);
-  border-left: 4px solid var(--warning-500, #f59e0b);
+  background-color: var(--warning-50, var(--warning-50));
+  border-left: 4px solid var(--warning-500, var(--warning-500));
   border-radius: 6px;
   padding: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .warningIcon {
-  color: var(--warning-500, #f59e0b);
+  color: var(--warning-500, var(--warning-500));
   font-size: 1.25rem;
   margin-right: 0.75rem;
   flex-shrink: 0;
@@ -360,7 +361,7 @@
 
 .warningText {
   margin: 0;
-  color: var(--warning-700, #b45309);
+  color: var(--warning-700, var(--warning-800));
   font-size: 0.9375rem;
   line-height: 1.5;
 }

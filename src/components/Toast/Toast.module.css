@@ -5,7 +5,7 @@
   max-width: 500px;
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-3);
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   border-left: 4px solid;

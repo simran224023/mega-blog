@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--border-op-06);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
 }
 
 .modalContainer {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
   max-width: 400px;
@@ -94,7 +94,7 @@
 
 .btnDanger {
   background: var(--error-500);
-  color: white;
+  color: var(--card-bg);
 }
 
 .btnDanger:hover {
@@ -103,7 +103,7 @@
 
 .btnWarning {
   background: var(--warning-500);
-  color: white;
+  color: var(--card-bg);
 }
 
 .btnWarning:hover {

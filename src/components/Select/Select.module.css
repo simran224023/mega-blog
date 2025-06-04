@@ -8,17 +8,17 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: #374151;
+  color: var(--primary-520);
   margin-bottom: 0.25rem;
 }
 
 .select {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--neutral-350);
   border-radius: 8px;
   font-size: 16px;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   transition: all 0.2s ease-in-out;
   outline: none;
   cursor: pointer;
@@ -31,37 +31,37 @@
 }
 
 .select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--border-color-1);
 }
 
 .select:hover {
-  border-color: #9ca3af;
+  border-color: var(--neutral-610);
 }
 
 .select:disabled {
-  background-color: #f9fafb;
-  color: #6b7280;
+  background-color: var(--neutral-75);
+  color: var(--neutral-450);
   cursor: not-allowed;
 }
 
 /* Select variants */
 .error {
-  border-color: #ef4444;
+  border-color: var(--error-500);
 }
 
 .error:focus {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: var(--error-500);
+  box-shadow: 0 0 0 3px var(--border-color-10);
 }
 
 .success {
-  border-color: #10b981;
+  border-color: var(--success-800);
 }
 
 .success:focus {
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: var(--success-800);
+  box-shadow: 0 0 0 3px var(--border-color-11);
 }
 
 /* Size variants */
@@ -76,7 +76,7 @@
 }
 
 .errorText {
-  color: #ef4444;
+  color: var(--error-500);
   font-size: 12px;
   margin-top: 0.25rem;
 }

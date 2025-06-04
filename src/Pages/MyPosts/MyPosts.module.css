@@ -7,7 +7,7 @@
 .editorContainer {
   max-width: 1400px;
   margin: 0 auto;
-  background: white;
+  background: var(--card-bg);
   display: flex;
   flex-direction: column;
 }
@@ -17,8 +17,8 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-4) var(--space-6);
-  border-bottom: 1px solid #e5e7eb;
-  background: white;
+  border-bottom: 1px solid var(--neutral-950);
+  background: var(--card-bg);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -47,18 +47,18 @@
 }
 
 .enhancedEmptyState {
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-2xl);
   padding: var(--space-16) var(--space-8);
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px var(--border-op-08);
   max-width: 500px;
   margin: var(--space-10) auto;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-op-05);
 }
 
 .emptyStateIconWrapper {
-  background: rgba(59, 130, 246, 0.1);
+  background: var(--border-color-1);
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -66,7 +66,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto var(--space-8);
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 8px 16px var(--border-color-1);
 }
 
 .emptyStateIcon {

@@ -33,7 +33,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    var(--bg-transparent),
     transparent
   );
   transition: left 0.3s ease;
@@ -45,7 +45,7 @@
 
 .btnSuccess {
   background: var(--success-500);
-  color: white;
+  color: var(--card-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -57,7 +57,7 @@
 
 .btnDanger {
   background: var(--error-500);
-  color: white;
+  color: var(--card-bg);
   box-shadow: var(--shadow-md);
 }
 

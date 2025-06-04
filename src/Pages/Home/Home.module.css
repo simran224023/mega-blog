@@ -24,12 +24,12 @@
   bottom: 0;
   background: radial-gradient(
       circle at 20% 50%,
-      rgba(255, 255, 255, 0.1) 0%,
+      var(--bg-transparent-2) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 80% 20%,
-      rgba(255, 255, 255, 0.05) 0%,
+      var(--bg-transparent-3) 0%,
       transparent 50%
     ),
     radial-gradient(
@@ -50,7 +50,7 @@
 }
 
 .heroText {
-  color: white;
+  color: var(--card-bg);
 }
 
 .heroTitle {
@@ -62,8 +62,12 @@
 }
 
 .brandHighlight {
-  color: #fbbf24;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: var(--warning-100);
+  background: linear-gradient(
+    135deg,
+    var(--warning-100) 0%,
+    var(--warning-500) 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -90,11 +94,11 @@
 }
 
 .heroCard {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-transparent-2);
   backdrop-filter: blur(20px);
   border-radius: var(--radius-2xl);
   padding: var(--space-10);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--bg-transparent-1);
   position: relative;
   overflow: hidden;
   transform: rotate(3deg);
@@ -115,10 +119,10 @@
   bottom: 0;
   background: linear-gradient(
       45deg,
-      rgba(255, 255, 255, 0.1) 25%,
+      var(--bg-transparent-2) 25%,
       transparent 25%
     ),
-    linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%);
+    linear-gradient(-45deg, var(--bg-transparent-2) 25%, transparent 25%);
   background-size: 20px 20px;
   opacity: 0.3;
 }
@@ -127,7 +131,7 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  color: white;
+  color: var(--card-bg);
 }
 
 .cardIcon {
@@ -141,7 +145,7 @@
   width: 60px;
   height: 60px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+  filter: drop-shadow(0 4px 8px var(--bg-transparent-1));
   animation: heroLogoFloat 3s ease-in-out infinite;
 }
 
@@ -158,7 +162,7 @@
 /* Featured Section */
 .featuredSection {
   padding: var(--space-10) 0;
-  background: white;
+  background: var(--card-bg);
 }
 
 .sectionHeader {
@@ -215,7 +219,7 @@
 .statCard {
   text-align: center;
   padding: var(--space-8) var(--space-6);
-  background: white;
+  background: var(--card-bg);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
@@ -262,12 +266,12 @@
   bottom: 0;
   background: radial-gradient(
       circle at 30% 70%,
-      rgba(255, 255, 255, 0.1) 0%,
+      var(--bg-transparent-2) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 70% 30%,
-      rgba(255, 255, 255, 0.05) 0%,
+      var(--bg-transparent-3) 0%,
       transparent 50%
     );
   pointer-events: none;
@@ -275,7 +279,7 @@
 
 .ctaContent {
   text-align: center;
-  color: white;
+  color: var(--card-bg);
   position: relative;
   z-index: 2;
   max-width: 600px;
@@ -331,7 +335,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    var(--bg-transparent-1),
     transparent
   );
   transition: left 0.3s ease;
@@ -342,7 +346,7 @@
 }
 
 .btnPrimary {
-  background: white;
+  background: var(--card-bg);
   color: var(--primary-600);
   box-shadow: var(--shadow-md);
 }
@@ -355,13 +359,13 @@
 
 .btnSecondary {
   background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--card-bg);
+  border: 2px solid var(--bg-transparent-4);
 }
 
 .btnSecondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--bg-transparent-2);
+  border-color: var(--bg-transparent-5);
 }
 
 .btnOutline {
@@ -372,7 +376,7 @@
 
 .btnOutline:hover {
   background: var(--primary-500);
-  color: white;
+  color: var(--card-bg);
 }
 
 .btnLarge {
@@ -495,7 +499,7 @@
   font-weight: 700;
   color: var(--primary-700);
   margin-bottom: var(--space-3);
-  background:  var(--primary-600);
+  background: var(--primary-600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
@@ -525,13 +529,13 @@
 }
 
 .loginPromptActions .btnPrimary {
-  background:  var(--primary-500);
-  color: white;
+  background: var(--primary-500);
+  color: var(--card-bg);
   box-shadow: 0 4px 12px rgba(var(--primary-600-rgb), 0.25);
 }
 
 .loginPromptActions .btnPrimary:hover {
-  background:  var(--primary-600);
+  background: var(--primary-600);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(var(--primary-600-rgb), 0.35);
 }

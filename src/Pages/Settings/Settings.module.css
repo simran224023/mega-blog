@@ -80,7 +80,7 @@
   background-color: var(--background-secondary);
   border-radius: 10px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--border-op-01);
   border: 1px solid var(--border-color);
 }
 
@@ -111,7 +111,7 @@
 .textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid var(--neutral-300, #d1d5db);
+  border: 2px solid var(--neutral-300, var(--neutral-350));
   border-radius: var(--radius-lg, 8px);
   font-size: var(--text-base, 1rem);
   font-family: inherit;
@@ -124,15 +124,15 @@
 .input:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--primary-500, #3b82f6);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  background: var(--primary-50, #eff6ff);
+  border-color: var(--primary-500, var(--primary-500));
+  box-shadow: 0 0 0 3px var(--border-color-1);
+  background: var(--primary-50, var(--primary-50));
 }
 
 .input:disabled {
-  background-color: var(--neutral-100, #f3f4f6);
-  border-color: var(--neutral-300, #d1d5db);
-  color: var(--neutral-500, #6b7280);
+  background-color: var(--neutral-100, var(--neutral-60));
+  border-color: var(--neutral-300, var(--neutral-350));
+  color: var(--neutral-500, var(--neutral-450));
   cursor: not-allowed;
 }
 
@@ -143,7 +143,7 @@
 
 .fieldNote {
   font-size: 0.8125rem;
-  color: var(--neutral-500, #6b7280);
+  color: var(--neutral-500, var(--neutral-450));
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
@@ -170,7 +170,7 @@
   width: 18px;
   height: 18px;
   margin-right: 0.75rem;
-  accent-color: var(--primary-600, #2563eb);
+  accent-color: var(--primary-600, var(--primary-600));
   cursor: pointer;
 }
 

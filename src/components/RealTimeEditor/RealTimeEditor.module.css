@@ -15,12 +15,12 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: border-color 0.2s ease;
-  background: white;
+  background: var(--card-bg);
 }
 
 .editorWrapper:focus-within {
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px var(--border-color-1);
 }
 
 .errorText {
@@ -64,11 +64,11 @@
 
 :global(.tox-tbtn--enabled) {
   background: var(--primary-500) !important;
-  color: white !important;
+  color: var(--card-bg) !important;
 }
 
 :global(.tox-edit-area__iframe) {
-  background: white !important;
+  background: var(--card-bg) !important;
 }
 
 :global(.tox-statusbar) {

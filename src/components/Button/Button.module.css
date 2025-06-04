@@ -43,7 +43,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    var(--bg-transparent),
     transparent
   );
   transition: left 0.3s ease;
@@ -56,7 +56,7 @@
 /* Variants */
 .primary {
   background: var(--primary-500);
-  color: white;
+  color:var(--card-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -79,7 +79,7 @@
 
 .success {
   background: var(--success-500);
-  color: white;
+  color:var(--card-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -91,7 +91,7 @@
 
 .danger {
   background: var(--error-500);
-  color: white;
+  color:var(--card-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -109,7 +109,7 @@
 
 .outline:hover:not(:disabled) {
   background: var(--primary-500);
-  color: white;
+  color:var(--card-bg);
 }
 
 .ghost {
@@ -169,9 +169,9 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--bg-transparent-4);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color:var(--card-bg);
   animation: spin 1s linear infinite;
 }
 
