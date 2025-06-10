@@ -1,6 +1,5 @@
 # Mega Blog
 
-![Mega Blog](https://raw.githubusercontent.com/simran224023/mega-blog/main/public/mega-blog-logo.png)
 
 ## 📋 Overview
 
