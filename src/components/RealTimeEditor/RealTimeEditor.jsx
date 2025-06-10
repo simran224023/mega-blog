@@ -206,7 +206,7 @@ export default function RealTimeEditor({
       `
       : `
         body { 
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; 
+          font-family: Arial; 
           font-size: 16px;
           line-height: 1.7;
           color: #374151;
