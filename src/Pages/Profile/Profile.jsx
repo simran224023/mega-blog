@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { fetchUserPosts } from "../../store/postSlice";
+import { usePostService } from "../../hooks/usePostService";
 import { Container, Card } from "../../components";
 import Loader from "../../components/Loader/Loader";
 import styles from "./Profile.module.css";
@@ -14,11 +14,9 @@ import {
   FiLock,
 } from "react-icons/fi";
 
-// Your component here
 const Profile = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userPosts, loading } = useSelector((state) => state.posts);
+  const { userPosts, loading, getUserPosts } = usePostService();
   const userData = useSelector((state) => state.auth.userData);
   const authStatus = useSelector((state) => state.auth.status);
   // Function to navigate to settings with specific tab
@@ -33,9 +31,9 @@ const Profile = () => {
     }
 
     if (userData) {
-      dispatch(fetchUserPosts(userData.$id));
+      getUserPosts(userData.$id);
     }
-  }, [dispatch, userData, authStatus, navigate]);
+  }, [userData, authStatus, navigate, getUserPosts]);
 
   // Format join date
   const formatJoinDate = () => {

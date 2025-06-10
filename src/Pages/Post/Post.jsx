@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPostById, deletePost } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import appwriteService from "../../appwrite/config";
 import { Container } from "../../components";
 import parse from "html-react-parser";
@@ -13,12 +13,17 @@ import "../styles.css";
 import { FiCalendar, FiUser, FiEdit, FiTrash2 } from "react-icons/fi";
 
 export default function Post() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { slug } = useParams();
-  const { success, error } = useToast();
+  const { success: showSuccess, error: showError } = useToast(); 
 
-  const { currentPost: post, loading } = useSelector((state) => state.posts);
+  const { 
+    currentPost: post, 
+    loading, 
+    getPostById, 
+    deleteExistingPost 
+  } = usePostService();
+  
   const userData = useSelector((state) => state.auth.userData);
   const { displayPreferences } = useSelector((state) => state.userPreferences);
 
@@ -31,11 +36,13 @@ export default function Post() {
 
   useEffect(() => {
     if (slug) {
-      dispatch(fetchPostById(slug));
+      getPostById(slug).catch(() => {
+        navigate("/");
+      });
     } else {
       navigate("/");
     }
-  }, [slug, dispatch, navigate]);
+  }, [slug, navigate, getPostById]);
 
   // Format creation date
   const formatCreationDate = () => {
@@ -63,13 +70,14 @@ export default function Post() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await dispatch(
-        deletePost({ postId: post.$id, featuredImage: post.featuredImage })
-      ).unwrap();
-      success("Post deleted successfully!");
-      navigate("/");
+      const deleteSuccess = await deleteExistingPost(post.$id, post.featuredImage); 
+      if (deleteSuccess) {
+        navigate("/");
+      } else {
+        showError("Failed to delete post");
+      }
     } catch (err) {
-      error("Failed to delete post");
+      showError("Failed to delete post");
       console.error("Delete error:", err);
     } finally {
       setDeleting(false);

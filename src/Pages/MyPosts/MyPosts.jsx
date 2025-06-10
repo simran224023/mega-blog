@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserPosts } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import { Card, Container } from "../../components";
 import Loader from "../../components/Loader/Loader";
 import styles from "./MyPosts.module.css";
 import "../styles.css";
 
 const MyPosts = () => {
-  const dispatch = useDispatch();
-  const { userPosts, loading } = useSelector((state) => state.posts);
+  const { userPosts, loading, getUserPosts } = usePostService();
   const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
     if (userData) {
-      dispatch(fetchUserPosts(userData.$id));
+      getUserPosts(userData.$id);
     }
-  }, [dispatch, userData]);
+  }, [userData, getUserPosts]);
 
   if (loading) {
     return (

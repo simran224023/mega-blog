@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./AuthLayout.module.css";
 
 export default function Protected({ children, authentication = true }) {
   const navigate = useNavigate();
-  const [loader, setLoader] = useState(true);
   const authStatus = useSelector((state) => state?.auth?.status);
+  const userData = useSelector((state) => state?.auth?.userData);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (authentication && authStatus !== authentication) {
+    if (authentication) {
+      if (!authStatus || !userData) {
         navigate("/login");
-      } else if (!authentication && authStatus !== authentication) {
+      }
+    } 
+    else {
+      if (authStatus && userData) {
         navigate("/");
       }
-      setLoader(false);
-    }, 500);
+    }
+  }, [authentication, authStatus, userData, navigate]);
 
-    return () => clearTimeout(timer);
-  }, [authentication, authStatus, navigate]);
   return <div className={styles.protectedContent}>{children}</div>;
 }

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../store/postSlice";
+import React, { useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import { Container, Card } from "../../components";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
@@ -8,14 +8,18 @@ import styles from "./Home.module.css";
 import "../styles.css";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => state.posts);
+  const { posts, loading, getAllPosts } = usePostService();
   const authStatus = useSelector((state) => state?.auth?.status);
   const featuredPosts = posts?.slice(0, 3);
 
+  // Use useCallback to memoize the function call
+  const loadPosts = useCallback(() => {
+    getAllPosts();
+  }, [getAllPosts]);
+
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    loadPosts();
+  }, [loadPosts]);
 
   if (loading) {
     return (

@@ -41,13 +41,12 @@ export class AuthService {
     try {
       return await this.account.get();
     } catch (error) {
-      // Handle guest users gracefully - don't throw error
       if (error.code === 401 || error.type === "general_unauthorized_scope") {
         console.log("User not authenticated (guest user)");
         return null;
       }
       console.error("Error getting current user:", error);
-      return null; // Return null instead of throwing
+      return null; 
     }
   }
   async logout() {
@@ -60,20 +59,16 @@ export class AuthService {
   }
 
   async getUserById(userId) {
-    // Return from cache if available to reduce API calls
     if (
       this.userCache[userId] &&
       Date.now() - this.userCache[userId].timestamp < 3600000
     ) {
-      // Cache for 1 hour
       return this.userCache[userId].data;
     }
 
     try {
-      // This gets the user from Appwrite's auth system
       const user = await this.account.get(userId);
 
-      // Store relevant user data in cache
       this.userCache[userId] = {
         data: {
           $id: user.$id,
@@ -95,15 +90,10 @@ export class AuthService {
 
   async updatePassword(currentPassword, newPassword) {
     try {
-      // Appwrite's updatePassword requires the new password first, then the old password
       await this.account.updatePassword(newPassword, currentPassword);
-
-      // If we reach here, the password update was successful
       return { success: true };
     } catch (error) {
       console.error("Password update error:", error);
-
-      // Detect authentication errors which indicate incorrect current password
       if (
         error.code === 401 ||
         error.code === "user_invalid_credentials" ||
@@ -113,16 +103,13 @@ export class AuthService {
             error.message.includes("authentication failed") ||
             error.message.includes("Password update failed")))
       ) {
-        // Return a specific error object for incorrect password
         return {
           success: false,
           message: "Current password is incorrect",
           code: 401,
-          requiresLogout: true, // Flag to indicate security logout is needed
+          requiresLogout: true,
         };
       }
-
-      // For other types of errors, return a generic error
       return {
         success: false,
         message: "Failed to update password",

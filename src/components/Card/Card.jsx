@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { deletePost } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import appwriteService from "../../appwrite/config";
 import authService from "../../appwrite/auth";
 import { useToast } from "../../hooks/useToast";
@@ -14,6 +14,7 @@ import {
   FiUser,
   FiArrowRight
 } from "react-icons/fi";
+
 function Card({
   $id,
   title,
@@ -24,7 +25,6 @@ function Card({
   $createdAt,
   author, // We'll now accept an author object from enhanced posts
 }) {
-  const dispatch = useDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
@@ -33,7 +33,8 @@ function Card({
 
   const userData = useSelector((state) => state.auth.userData);
   const { displayPreferences } = useSelector((state) => state.userPreferences);
-  const { success, error } = useToast();
+  const { success: showSuccess, error: showError } = useToast(); 
+  const { deleteExistingPost } = usePostService();
 
   // Check if the current user is the author of this post
   const isAuthor = userData && userId ? userData.$id === userId : false;
@@ -85,17 +86,14 @@ function Card({
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await dispatch(
-        deletePost({
-          postId: $id,
-          featuredImage,
-        })
-      ).unwrap();
-
-      success("Post deleted successfully!");
-      window.location.reload();
+      const deleteSuccess = await deleteExistingPost($id, featuredImage);s
+      if (deleteSuccess) {
+        window.location.reload();
+      } else {
+        showError("Failed to delete post");
+      }
     } catch (err) {
-      error("Failed to delete post");
+      showError("Failed to delete post");
       console.error("Delete error:", err);
     } finally {
       setDeleting(false);

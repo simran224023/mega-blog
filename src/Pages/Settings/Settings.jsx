@@ -5,9 +5,12 @@ import { Container } from "../../components";
 import { useToast } from "../../hooks/useToast";
 import Button from "../../components/Button/Button";
 import SecuritySettings from "../../components/SecuritySettings/SecuritySettings";
+import preferencesService from "../../appwrite/preferences";
 import {
-  fetchUserPreferences,
-  updateUserPreferences,
+  setPreferences,
+  setLoading,
+  setError,
+  clearError,
 } from "../../store/userPreferencesSlice";
 import styles from "./Settings.module.css";
 import "../styles.css";
@@ -38,17 +41,24 @@ const Settings = () => {
 
   // Load user preferences
   useEffect(() => {
-    if (userData && !initialized) {
-      dispatch(fetchUserPreferences(userData.$id));
-    }
+    const loadUserPreferences = async () => {
+      if (!userData || initialized) return;
 
-    // Apply current theme on component mount (based on Redux state)
-    if (displayPreferences.darkMode) {
-      document.documentElement.classList.add("dark-theme");
-    } else {
-      document.documentElement.classList.remove("dark-theme");
-    }
-  }, [dispatch, userData, initialized, displayPreferences.darkMode]);
+      dispatch(setLoading(true));
+      dispatch(clearError());
+
+      try {
+        const preferences = await preferencesService.getUserPreferences(userData.$id);
+        dispatch(setPreferences(preferences));
+        preferencesService.applyThemePreferences(preferences);
+      } catch (error) {
+        console.error("Error loading user preferences:", error);
+        dispatch(setError(error.message));
+      }
+    };
+
+    loadUserPreferences();
+  }, [dispatch, userData, initialized]);
 
   // Initialize local form state from Redux state
   useEffect(() => {
@@ -96,6 +106,9 @@ const Settings = () => {
         return;
       }
       setLoader(true);
+      dispatch(setLoading(true));
+      dispatch(clearError());
+
       // Prepare preferences object with local form state
       const updatedPreferences = {
         profile: {
@@ -110,12 +123,12 @@ const Settings = () => {
       };
 
       // Save preferences
-      await dispatch(
-        updateUserPreferences({
-          userId: userData.$id,
-          preferences: updatedPreferences,
-        })
-      ).unwrap();
+      const savedPreferences = await preferencesService.updateUserPreferences(
+        userData.$id,
+        updatedPreferences
+      );
+
+      dispatch(setPreferences(savedPreferences));
 
       // Apply dark mode theme after successful update
       if (localFormState.darkMode) {
@@ -127,9 +140,11 @@ const Settings = () => {
       success("Settings updated successfully");
     } catch (err) {
       console.error("Error updating settings:", err);
+      dispatch(setError(err.message));
       showError("Failed to update settings. Please try again.");
     } finally {
       setLoader(false);
+      dispatch(setLoading(false));
     }
   };
 

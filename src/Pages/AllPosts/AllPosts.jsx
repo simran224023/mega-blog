@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../store/postSlice";
+import { usePostService } from "../../hooks/usePostService";
 import { Card, Container } from "../../components";
 import Loader from "../../components/Loader/Loader";
 import styles from "./AllPosts.module.css";
 import "../styles.css";
 
 const AllPosts = () => {
-  const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => state.posts);
+  const { posts, loading, getAllPosts } = usePostService();
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    getAllPosts();
+  }, [getAllPosts]);
 
   if (loading) {
     return (

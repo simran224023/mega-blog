@@ -13,6 +13,8 @@ import {
 } from "react-icons/fi";
 import authService from "../../appwrite/auth";
 import { logout } from "../../store/authSlice";
+import { clearPosts } from "../../store/postSlice";
+import { resetPreferences } from "../../store/userPreferencesSlice";
 import styles from "./SecuritySettings.module.css";
 
 function SecuritySettings() {
@@ -50,11 +52,15 @@ function SecuritySettings() {
     try {
       await authService.logout();
       dispatch(logout());
+      dispatch(clearPosts());
+      dispatch(resetPreferences());
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
       // Force logout on client side even if server logout fails
       dispatch(logout());
+      dispatch(clearPosts());
+      dispatch(resetPreferences());
       navigate("/login");
     }
   };

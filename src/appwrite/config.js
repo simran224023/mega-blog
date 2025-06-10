@@ -100,7 +100,18 @@ export class Service {
       return false;
     }
   }
-
+  async getUserPosts(userId) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appWriteDatabaseId,
+        conf.appWriteCollectionId,
+        [Query.equal("userId", userId), Query.equal("status", "active")]
+      );
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+      return false;
+    }
+  }
   async uploadImage(file) {
     try {
       return await this.bucket.createFile(

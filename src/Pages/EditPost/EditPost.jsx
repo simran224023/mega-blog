@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PostForm } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPostById } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import { useToast } from "../../hooks/useToast";
@@ -9,23 +9,21 @@ import styles from "./EditPost.module.css";
 import "../styles.css";
 
 const EditPost = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { slug } = useParams();
   const { error } = useToast();
   
-  const { currentPost: post, loading } = useSelector((state) => state.posts);
+  const { currentPost: post, loading, getPostById } = usePostService();
   const userData = useSelector((state) => state.auth.userData);
   
   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     if (slug) {
-      dispatch(fetchPostById(slug))
-        .unwrap()
+      getPostById(slug)
         .then(post => {
           // Check if the current user is the author
-          if (userData && post.userId !== userData.$id) {
+          if (userData && post && post.userId !== userData.$id) {
             setUnauthorized(true);
             error("You can only edit your own posts");
             setTimeout(() => navigate("/"), 2000);
@@ -37,7 +35,7 @@ const EditPost = () => {
     } else {
       navigate("/");
     }
-  }, [slug, dispatch, navigate, userData, error]);
+  }, [slug, navigate, userData, error, getPostById]);
 
   if (loading) {
     return (

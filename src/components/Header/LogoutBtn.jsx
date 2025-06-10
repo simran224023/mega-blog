@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth";
 import { logout } from "../../store/authSlice";
+import { clearPosts } from "../../store/postSlice";
+import { resetPreferences } from "../../store/userPreferencesSlice";
 import { useToast } from "../../hooks/useToast";
 import Button from "../Button/Button";
 import styles from "./LogoutBtn.module.css";
@@ -16,6 +18,8 @@ function LogoutBtn({ onLogoutSuccess }) {
     try {
       await authService.logout();
       dispatch(logout());
+      dispatch(clearPosts());
+      dispatch(resetPreferences());
       success("Logout successful!");
       if (onLogoutSuccess) {
         onLogoutSuccess();

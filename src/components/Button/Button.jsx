@@ -30,9 +30,6 @@ const Button = ({
     .join(" ");
 
   const isDisabled = disabled || loading;
-  console.log("isDisabled", isDisabled);
-  console.log("buttonClass", buttonClass);
-  console.log("loading", loading);
   return (
     <button
       className={buttonClass}

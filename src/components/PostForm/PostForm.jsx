@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { createPost, updatePost } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { usePostService } from "../../hooks/usePostService";
 import appwriteService from "../../appwrite/config";
 import { useToast } from "../../hooks/useToast";
 import Button from "../Button/Button";
@@ -29,9 +29,8 @@ export default function PostForm({ post }) {
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
-  const { loading } = useSelector((state) => state.posts);
+  const { loading, createNewPost, updateExistingPost } = usePostService();
   const { success, error } = useToast();
 
   const [imageFile, setImageFile] = useState(null);
@@ -102,18 +101,20 @@ export default function PostForm({ post }) {
 
       if (post) {
         // Update existing post
-        await dispatch(
-          updatePost({
-            postId: post.$id,
-            ...postData,
-          })
-        ).unwrap();
+        const result = await updateExistingPost({
+          postId: post.$id,
+          ...postData,
+        });
 
-        success("Post updated successfully!");
-        navigate(`/post/${post.$id}`);
+        if (result.success) {
+          success("Post updated successfully!");
+          navigate(`/post/${post.$id}`);
+        } else {
+          error(result.message || "Failed to update post");
+        }
       } else {
         // Create new post
-        const newPost = await dispatch(createPost(postData)).unwrap();
+        const newPost = await createNewPost(postData);
 
         if (newPost) {
           success("Post created successfully!");
