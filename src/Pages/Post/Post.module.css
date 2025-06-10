@@ -196,7 +196,40 @@
   height: auto;
   margin: 1rem 0;
 }
+.postContent table {
+  width: 100%;
+  margin: var(--space-8) 0;
+  border-collapse: collapse;
+  border: 1px solid var(--neutral-200);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
 
+.postContent th {
+  background-color: var(--neutral-100);
+  color: var(--neutral-900);
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border: 2px solid var(--neutral-300);
+}
+
+.postContent td {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--neutral-200);
+}
+
+@media (max-width: 768px) {
+  .postContent table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .postContent th,
+  .postContent td {
+    padding: var(--space-3) var(--space-4);
+  }
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
